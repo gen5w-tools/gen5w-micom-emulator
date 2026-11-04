@@ -1,0 +1,8 @@
+FROM python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+RUN pip install --no-cache-dir pypcode==3.3.3
+COPY micom_vle.slaspec /opt/micom-vle/micom_vle.slaspec
+RUN python3 -c 'import pathlib,pypcode,shutil; p=pathlib.Path(pypcode.__file__).parent/"processors/PowerPC/data/languages"; [shutil.copy(f,"/opt/micom-vle") for f in p.iterdir() if f.suffix in (".sinc",".pspec")]' \
+ && /usr/local/lib/python3.13/site-packages/pypcode/bin/sleigh /opt/micom-vle/micom_vle.slaspec
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+WORKDIR /work
+ENTRYPOINT ["python3", "/app/micom.py"]

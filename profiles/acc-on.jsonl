@@ -1,0 +1,4 @@
+{"step":0,"kind":"gpio","pin":1,"value":1}
+{"step":0,"kind":"gpio","pin":91,"value":1}
+{"step":0,"kind":"switches","value":33298432}
+{"step":2000000,"kind":"switches","value":33299520}
